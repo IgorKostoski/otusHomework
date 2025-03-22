@@ -27,6 +27,7 @@ hs_err_pid*
 .gradle
 /buildSrc/.gradle/
 ./gradle
+./gradle/wrapper
 
 # Ignore Gradle build output directory
 build

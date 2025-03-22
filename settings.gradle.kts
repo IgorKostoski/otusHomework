@@ -1,5 +1,5 @@
 rootProject.name = "outsHomework"
-
+include("hw01-gradle")
 
 
 pluginManagement {

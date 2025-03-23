@@ -2,13 +2,10 @@ package homework;
 
 import java.util.Objects;
 
-// при выполнении ДЗ эту аннотацию надо удалить
 public class Customer {
     private final long id;
     private String name;
     private long scores;
-
-    // todo: 1. в этом классе надо исправить ошибки
 
     public Customer(long id, String name, long scores) {
         this.id = id;
@@ -49,11 +46,6 @@ public class Customer {
         Customer customer = (Customer) o;
 
         return id == customer.id;
-        // the customer is set only to depend on the id, and the id isnt chaging.
-
-        //        if (id != customer.id) return false;
-        //        if (scores != customer.scores) return false;
-        //        return Objects.equals(name, customer.name);
     }
 
     @Override

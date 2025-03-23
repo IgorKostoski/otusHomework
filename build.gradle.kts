@@ -1,12 +1,15 @@
+
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import name.remal.gradle_plugins.sonarlint.SonarLintExtension
-import org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
 import org.gradle.plugins.ide.idea.model.IdeaLanguageLevel
+import org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
 
 plugins {
     idea
+    id("java")
     id("fr.brouillard.oss.gradle.jgitver")
     id("io.spring.dependency-management")
+    id("project-report")
     id("org.springframework.boot") apply false
     id("name.remal.sonarlint") apply false
     id("com.diffplug.spotless") apply false
@@ -24,7 +27,7 @@ idea {
 
 
 allprojects {
-    group = "ru.otus"
+    group = "org.example"
 
     repositories {
         mavenLocal()

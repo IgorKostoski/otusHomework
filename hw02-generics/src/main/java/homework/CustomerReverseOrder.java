@@ -1,19 +1,18 @@
 package homework;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class CustomerReverseOrder {
 
-    private final Stack<Customer> customerStack = new Stack<>();
+    private final Deque<Customer> customerDequer = new ArrayDeque<>();
 
     public void add(Customer customer) {
-        customerStack.push(customer);
+        customerDequer.push(customer);
     }
 
     public Customer take() {
-        if (customerStack.isEmpty()) {
-            return null;
-        }
-        return customerStack.pop();
+
+        return customerDequer.pop();
     }
 }

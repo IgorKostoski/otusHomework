@@ -1,4 +1,4 @@
-package org.example;
+package homework;
 
 public class Data {
     private final Integer value;

@@ -9,7 +9,7 @@ public class MyTest {
     private String message;
 
     @Before
-    public void setup() {
+    void setup() {
         message = "Test setup";
         logger.info("Before method called: " + message);
     }

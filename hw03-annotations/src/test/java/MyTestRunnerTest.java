@@ -5,12 +5,12 @@ import annotations.Before;
 import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
 
-public class MyTestRunnerTest {
+class MyTestRunnerTest {
 
     private static final Logger logger = Logger.getLogger(MyTestRunnerTest.class.getName());
 
     @Test
-    public void testRunnerRunsTest() throws ClassNotFoundException {
+    void testRunnerRunsTest() throws ClassNotFoundException {
         logger.info("Starting testRunnerRunsTest");
 
         TestRunner.run(TestClassForRunner.class.getName());

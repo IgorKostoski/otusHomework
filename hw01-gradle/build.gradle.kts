@@ -16,7 +16,7 @@ tasks {
         archiveVersion.set("0.1")
         archiveClassifier.set("")
         manifest{
-            attributes(mapOf("Main-Class" to "org.example.App"))
+            attributes(mapOf("Main-Class" to "example.App"))
         }
     }
 

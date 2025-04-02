@@ -1,8 +1,8 @@
 package homework;
 
 /*
--Xms256m
--Xmx256m
+-Xms16m
+-Xmx16m
 -XX:+HeapDumpOnOutOfMemoryError
 -XX:HeapDumpPath=./logs/heapdump.hprof
 -XX:+UseG1GC

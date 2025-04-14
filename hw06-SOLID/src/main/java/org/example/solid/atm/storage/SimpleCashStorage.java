@@ -1,11 +1,12 @@
 package org.example.solid.atm.storage;
 
+import org.example.solid.atm.currency.Denomination;
+
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import org.example.solid.atm.currency.Denomination;
 
 public final class SimpleCashStorage implements CashStorage {
     private final Map<Denomination, Integer> cells = new EnumMap<>(Denomination.class);

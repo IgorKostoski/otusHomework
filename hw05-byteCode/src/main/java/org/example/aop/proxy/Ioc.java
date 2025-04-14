@@ -1,16 +1,14 @@
 package org.example.aop.proxy;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-class Ioc {
-    private static final Logger logger = LoggerFactory.getLogger(Ioc.class);
+final class Ioc {
 
     private Ioc() {}
 
@@ -22,7 +20,7 @@ class Ioc {
     }
 
     static class DemoInvocationHandler implements InvocationHandler {
-        private static final Logger handlerLogger = LoggerFactory.getLogger(DemoInvocationHandler.class);
+        private static final Logger logger = LoggerFactory.getLogger(DemoInvocationHandler.class);
         private final Object originalObject;
         private final Class<?> originalClass;
 
@@ -37,7 +35,13 @@ class Ioc {
             try {
                 implementationMethod = originalClass.getMethod(method.getName(), method.getParameterTypes());
             } catch (NoSuchMethodException e) {
+                logger.warn(
+                        "Could not find implementation method for: {}, annotation check skipped", method.getName(), e);
 
+                throw new ProxySetupException(
+                        "Proxy setup error: Method not found on implementation class " + originalClass.getName() + ": "
+                                + method.getName(),
+                        e);
             }
 
             if (implementationMethod != null && implementationMethod.isAnnotationPresent(Log.class)) {
@@ -48,9 +52,7 @@ class Ioc {
                     paramsLog = "param(s): "
                             + Arrays.stream(args).map(String::valueOf).collect(Collectors.joining(", "));
                 }
-                handlerLogger.info("executed method: {}, {}", method.getName(), paramsLog);
-            } else {
-
+                logger.info("executed method: {}, {}", method.getName(), paramsLog);
             }
             return method.invoke(originalObject, args);
         }

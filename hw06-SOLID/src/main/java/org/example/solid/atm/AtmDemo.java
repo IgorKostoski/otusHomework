@@ -1,5 +1,7 @@
 package org.example.solid.atm;
 
+import java.util.EnumMap;
+import java.util.Map;
 import org.example.solid.atm.currency.Denomination;
 import org.example.solid.atm.logic.GreddyWithdrawalStrategy;
 import org.example.solid.atm.logic.WithdrawalStrategy;
@@ -9,9 +11,6 @@ import org.example.solid.atm.storage.InsufficientFundsException;
 import org.example.solid.atm.storage.SimpleCashStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.EnumMap;
-import java.util.Map;
 
 public class AtmDemo {
     private static final Logger logger = LoggerFactory.getLogger(AtmDemo.class);

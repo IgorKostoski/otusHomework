@@ -8,7 +8,11 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+<<<<<<< HEAD
 final class Ioc {
+=======
+class Ioc {
+>>>>>>> hw06-SOLID
 
     private Ioc() {}
 
@@ -35,6 +39,7 @@ final class Ioc {
             try {
                 implementationMethod = originalClass.getMethod(method.getName(), method.getParameterTypes());
             } catch (NoSuchMethodException e) {
+<<<<<<< HEAD
                 logger.warn(
                         "Could not find implementation method for: {}, annotation check skipped", method.getName(), e);
 
@@ -42,6 +47,10 @@ final class Ioc {
                         "Proxy setup error: Method not found on implementation class " + originalClass.getName() + ": "
                                 + method.getName(),
                         e);
+=======
+                handlerLogger.warn(
+                        "Could not findd implementation method for: {}, annotation check skipped", method.getName(), e);
+>>>>>>> hw06-SOLID
             }
 
             if (implementationMethod != null && implementationMethod.isAnnotationPresent(Log.class)) {
@@ -52,7 +61,11 @@ final class Ioc {
                     paramsLog = "param(s): "
                             + Arrays.stream(args).map(String::valueOf).collect(Collectors.joining(", "));
                 }
+<<<<<<< HEAD
                 logger.info("executed method: {}, {}", method.getName(), paramsLog);
+=======
+                handlerLogger.info("executed method: {}, {}", method.getName(), paramsLog);
+>>>>>>> hw06-SOLID
             }
             return method.invoke(originalObject, args);
         }

@@ -11,13 +11,13 @@ import org.example.solid.atm.storage.InsufficientFundsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AtmService implements Atm {
-    private static final Logger logger = LoggerFactory.getLogger(AtmService.class);
+public class AtmImpl implements Atm {
+    private static final Logger logger = LoggerFactory.getLogger(AtmImpl.class);
 
     private final CashStorage cashStorage;
     private final WithdrawalStrategy withdrawalStrategy;
 
-    public AtmService(CashStorage cashStorage, WithdrawalStrategy withdrawalStrategy) {
+    public AtmImpl(CashStorage cashStorage, WithdrawalStrategy withdrawalStrategy) {
         this.cashStorage = Objects.requireNonNull(cashStorage, "CashStorage cannot be null");
         this.withdrawalStrategy = Objects.requireNonNull(withdrawalStrategy, "WithdrawStrategy cannot be null");
         logger.info(

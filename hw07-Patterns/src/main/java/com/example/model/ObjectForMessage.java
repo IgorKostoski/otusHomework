@@ -12,11 +12,21 @@ public class ObjectForMessage {
     }
 
     public List<String> getData() {
+
         return data;
     }
 
     public void setData(List<String> data) {
+
         this.data = data;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ObjectForMessage that = (ObjectForMessage) o;
+        return Objects.equals(data, that.data);
     }
 
     @Override
@@ -26,6 +36,6 @@ public class ObjectForMessage {
 
     @Override
     public String toString() {
-        return "ObjectForMessage{" + "data" + data + '}';
+        return "ObjectForMessage{" + "data=" + data + '}';
     }
 }

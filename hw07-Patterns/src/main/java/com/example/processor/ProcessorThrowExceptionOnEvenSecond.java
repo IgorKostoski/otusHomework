@@ -3,8 +3,11 @@ package com.example.processor;
 import com.example.model.Message;
 import java.time.Clock;
 import java.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProcessorThrowExceptionOnEvenSecond implements Processor {
+    private static final Logger logger = LoggerFactory.getLogger(ProcessorThrowExceptionOnEvenSecond.class);
 
     private final Clock clock;
 
@@ -20,7 +23,7 @@ public class ProcessorThrowExceptionOnEvenSecond implements Processor {
     public Message process(Message message) {
         LocalDateTime now = LocalDateTime.now(clock);
         int second = now.getSecond();
-        System.out.println("Current seond: " + second);
+        logger.debug("Current second: {}", second);
         if (second % 2 == 0) {
             throw new EvenSecondException("Exception thrown because second is even: " + second);
         }

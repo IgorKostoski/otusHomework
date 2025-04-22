@@ -28,7 +28,7 @@ class ComplexProcessorTest {
 
         var processors = List.of(processor1, processor2);
 
-        var complexProcessor = new ComplexProcessor(processors, (ex) -> {});
+        var complexProcessor = new ComplexProcessor(processors, ex -> {});
 
         // when
         var result = complexProcessor.handle(message);
@@ -53,7 +53,7 @@ class ComplexProcessorTest {
 
         var processors = List.of(processor1, processor2);
 
-        var complexProcessor = new ComplexProcessor(processors, (ex) -> {
+        var complexProcessor = new ComplexProcessor(processors, ex -> {
             throw new TestException(ex.getMessage());
         });
 
@@ -73,7 +73,7 @@ class ComplexProcessorTest {
 
         var listener = mock(Listener.class);
 
-        var complexProcessor = new ComplexProcessor(new ArrayList<>(), (ex) -> {});
+        var complexProcessor = new ComplexProcessor(new ArrayList<>(), ex -> {});
 
         complexProcessor.addListener(listener);
 

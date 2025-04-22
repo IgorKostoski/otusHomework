@@ -8,7 +8,7 @@ import java.time.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ProcessorThrowExceptionOnEvenSecondTest {
+class ProcessorThrowExceptionOnEvenSecondTest {
 
     @Test
     @DisplayName("Shpuld throw exception when second is even")

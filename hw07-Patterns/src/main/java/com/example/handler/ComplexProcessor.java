@@ -6,14 +6,18 @@ import com.example.processor.Processor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ComplexProcessor implements Handler {
+    private static final Logger logger = LoggerFactory.getLogger(ComplexProcessor.class.getName());
 
     private final List<Listener> listeners = new ArrayList<>();
     private final List<Processor> processors;
     private final Consumer<Exception> errorHandler;
 
     public ComplexProcessor(List<Processor> processors, Consumer<Exception> errorHandler) {
+
         this.processors = processors;
         this.errorHandler = errorHandler;
     }
@@ -47,7 +51,11 @@ public class ComplexProcessor implements Handler {
             try {
                 listener.onUpdated(msg);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                logger.error(
+                        "Exception during listener notification (listener: {}): {}",
+                        listener.getClass().getSimpleName(),
+                        ex.getMessage(),
+                        ex);
             }
         });
     }

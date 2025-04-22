@@ -9,8 +9,7 @@ public interface Atm {
 
     void deposit(Map<Denomination, Integer> notes);
 
-    Map<Denomination, Integer> withdraw(int amount)
-            throws InsufficientFundsException, CannotDispenseAmountException, CannotDispenseAmountException;
+    Map<Denomination, Integer> withdraw(int amount) throws InsufficientFundsException, CannotDispenseAmountException;
 
     long getBalance();
 }

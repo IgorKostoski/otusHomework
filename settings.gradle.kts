@@ -5,6 +5,7 @@ include("hw03-annotations")
 include("hw04-garbageCollection")
 include("hw05-byteCode")
 include("hw06-SOLID")
+//include("hw07-Patterns")
 
 
 

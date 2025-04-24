@@ -1,10 +1,11 @@
 package com.example.processor;
 
 import com.example.model.Message;
-import java.time.Clock;
-import java.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.Clock;
+import java.time.LocalDateTime;
 
 public class ProcessorThrowExceptionOnEvenSecond implements Processor {
     private static final Logger logger = LoggerFactory.getLogger(ProcessorThrowExceptionOnEvenSecond.class);
@@ -12,6 +13,9 @@ public class ProcessorThrowExceptionOnEvenSecond implements Processor {
     private final Clock clock;
 
     public ProcessorThrowExceptionOnEvenSecond(Clock clock) {
+        if (clock == null) {
+            throw new NullPointerException("Clock cannot be null");
+        }
         this.clock = clock;
     }
 
@@ -21,13 +25,23 @@ public class ProcessorThrowExceptionOnEvenSecond implements Processor {
 
     @Override
     public Message process(Message message) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        int second = now.getSecond();
-        logger.debug("Current second: {}", second);
-        if (second % 2 == 0) {
-            throw new EvenSecondException("Exception thrown because second is even: " + second);
+
+        if (message == null) {
+            logger.warn("Received null message to process");
+
+            return null;
         }
 
+        LocalDateTime now = LocalDateTime.now(clock);
+        int second = now.getSecond();
+        logger.debug("Processing message. Current second provided by the clock: {}", second);
+
+        if (second % 2 == 0) {
+            String exceptionMessage = ("Exception thrown because second is even: " + second);
+            logger.warn(exceptionMessage);
+            throw new EvenSecondException(exceptionMessage);
+        }
+        logger.debug("Processing successful (second was odd).");
         return message;
     }
 

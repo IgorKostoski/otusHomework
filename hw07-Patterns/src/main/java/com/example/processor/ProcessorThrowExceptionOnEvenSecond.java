@@ -1,11 +1,10 @@
 package com.example.processor;
 
 import com.example.model.Message;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.time.Clock;
 import java.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProcessorThrowExceptionOnEvenSecond implements Processor {
     private static final Logger logger = LoggerFactory.getLogger(ProcessorThrowExceptionOnEvenSecond.class);

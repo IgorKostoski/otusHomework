@@ -29,15 +29,16 @@ This repository contains homework assignments completed as part of the [OTUS "Ja
 
 Each folder corresponds to a homework assignment, focused on a specific area of Java development:
 
-| Directory             | Topic                                |
-|----------------------|--------------------------------------|
-| `hw01-gradle`        | Gradle build system introduction     |
-| `hw02-generics`      | Java Generics                        |
-| `hw03-annotations`   | Custom Annotations in Java           |
-| `hw04-garbageCollection` | Java Garbage Collection         |
-| `hw05-byteCode`      | Bytecode instrumentation             |
-| `hw06-SOLID`         | Applying SOLID principles            |
-| `hw07-Patterns`      | Design Patterns                      |
+| Directory                | Topic                            |
+|--------------------------|----------------------------------|
+| `hw01-gradle`            | Gradle build system introduction |
+| `hw02-generics`          | Java Generics                    |
+| `hw03-annotations`       | Custom Annotations in Java       |
+| `hw04-garbageCollection` | Java Garbage Collection          |
+| `hw05-byteCode`          | Bytecode instrumentation         |
+| `hw06-SOLID`             | Applying SOLID principles        |
+| `hw07-Patterns`          | Design Patterns                  |
+| `hw08-Io`                | Seralization                     |
 
 ## 🚀 Getting Started
 

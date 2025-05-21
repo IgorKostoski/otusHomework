@@ -33,13 +33,10 @@ public class HomeWork {
         var transactionRunner = new TransactionRunnerJdbc(dataSource);
         var dbExecutor = new DbExecutorImpl();
 
-
         EntityClassMetaData<Client> entityClassMetaDataClient = new EntityClassMetaDataImpl<>(Client.class);
         EntitySQLMetaData entitySQLMetaDataClient = new EntitySQLMetaDataImpl(entityClassMetaDataClient);
-        var dataTemplateClient = new DataTemplateJdbc<Client>(
-                dbExecutor,
-                entitySQLMetaDataClient,
-                entityClassMetaDataClient);
+        var dataTemplateClient =
+                new DataTemplateJdbc<Client>(dbExecutor, entitySQLMetaDataClient, entityClassMetaDataClient);
 
         // Код дальше должен остаться
         var dbServiceClient = new DbServiceClientImpl(transactionRunner, dataTemplateClient);

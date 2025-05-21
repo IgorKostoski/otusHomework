@@ -1,16 +1,15 @@
 package org.example.crm.repository;
 
-import org.example.core.repository.DataTemplate;
-import org.example.core.repository.DataTemplateException;
-import org.example.core.repository.executor.DbExecutor;
-import org.example.crm.model.Client;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import org.example.core.repository.DataTemplate;
+import org.example.core.repository.DataTemplateException;
+import org.example.core.repository.executor.DbExecutor;
+import org.example.crm.model.Client;
 
 public class ClientDataTemplateJdbc implements DataTemplate<Client> {
 

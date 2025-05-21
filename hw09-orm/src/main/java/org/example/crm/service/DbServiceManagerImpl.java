@@ -1,13 +1,12 @@
 package org.example.crm.service;
 
+import java.util.List;
+import java.util.Optional;
 import org.example.core.repository.DataTemplate;
 import org.example.core.sessionmanager.TransactionRunner;
 import org.example.crm.model.Manager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.Optional;
 
 public class DbServiceManagerImpl implements DBServiceManager {
     private static final Logger log = LoggerFactory.getLogger(DbServiceManagerImpl.class);

@@ -10,6 +10,8 @@ import org.example.crm.service.DbServiceManagerImpl;
 import org.example.jdbc.mapper.DataTemplateJdbc;
 import org.example.jdbc.mapper.EntityClassMetaData;
 import org.example.jdbc.mapper.EntitySQLMetaData;
+import org.example.jdbc.mapper.metadata.EntityClassMetaDataImpl;
+import org.example.jdbc.mapper.metadata.EntitySQLMetaDataImpl;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,11 +33,10 @@ public class HomeWork {
         var transactionRunner = new TransactionRunnerJdbc(dataSource);
         var dbExecutor = new DbExecutorImpl();
 
-        // Работа с клиентом
-        EntityClassMetaData<Client> entityClassMetaDataClient; // = new EntityClassMetaDataImpl();
-        EntitySQLMetaData entitySQLMetaDataClient = null; // = new EntitySQLMetaDataImpl(entityClassMetaDataClient);
-        var dataTemplateClient = new DataTemplateJdbc<Client>(
-                dbExecutor, entitySQLMetaDataClient); // реализация DataTemplate, универсальная
+        EntityClassMetaData<Client> entityClassMetaDataClient = new EntityClassMetaDataImpl<>(Client.class);
+        EntitySQLMetaData entitySQLMetaDataClient = new EntitySQLMetaDataImpl(entityClassMetaDataClient);
+        var dataTemplateClient =
+                new DataTemplateJdbc<Client>(dbExecutor, entitySQLMetaDataClient, entityClassMetaDataClient);
 
         // Код дальше должен остаться
         var dbServiceClient = new DbServiceClientImpl(transactionRunner, dataTemplateClient);
@@ -47,20 +48,46 @@ public class HomeWork {
                 .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecond.getId()));
         log.info("clientSecondSelected:{}", clientSecondSelected);
 
+        log.info("client all : {}", dbServiceClient.findAll());
+
         // Сделайте тоже самое с классом Manager (для него надо сделать свою таблицу)
 
-        EntityClassMetaData<Manager> entityClassMetaDataManager; // = new EntityClassMetaDataImpl();
-        EntitySQLMetaData entitySQLMetaDataManager = null; // = new EntitySQLMetaDataImpl(entityClassMetaDataManager);
-        var dataTemplateManager = new DataTemplateJdbc<Manager>(dbExecutor, entitySQLMetaDataManager);
+        EntityClassMetaData<Manager> entityClassMetaDataManager = new EntityClassMetaDataImpl<>(Manager.class);
+        EntitySQLMetaData entitySQLMetaDataManager = new EntitySQLMetaDataImpl(entityClassMetaDataManager);
+        var dataTemplateManager =
+                new DataTemplateJdbc<Manager>(dbExecutor, entitySQLMetaDataManager, entityClassMetaDataManager);
 
         var dbServiceManager = new DbServiceManagerImpl(transactionRunner, dataTemplateManager);
-        dbServiceManager.saveManager(new Manager("ManagerFirst"));
 
-        var managerSecond = dbServiceManager.saveManager(new Manager("ManagerSecond"));
+        dbServiceManager.saveManager(new Manager("ManagerFirst", "paramValue1"));
+
+        var managerSecond = dbServiceManager.saveManager(new Manager("ManagerSecond", "paramValue2"));
         var managerSecondSelected = dbServiceManager
                 .getManager(managerSecond.getNo())
                 .orElseThrow(() -> new RuntimeException("Manager not found, id:" + managerSecond.getNo()));
         log.info("managerSecondSelected:{}", managerSecondSelected);
+
+        log.info("manager all : {}", dbServiceManager.findAll());
+
+        if (clientSecondSelected != null) {
+            clientSecondSelected.setName("dbServiceSecondUpdated");
+            dbServiceClient.saveClient(clientSecondSelected);
+            var clientUpdatedSelected = dbServiceClient
+                    .getClient(clientSecondSelected.getId())
+                    .orElseThrow(() -> new RuntimeException("Client not found, id:" + clientSecondSelected.getId()));
+            log.info("clientUpdatedSelected:{}", clientUpdatedSelected);
+        }
+
+        if (managerSecondSelected != null) {
+            managerSecondSelected.setLabel("ManagerSecondUpdated");
+            managerSecondSelected.setParam1("paramValue1");
+            dbServiceManager.saveManager(managerSecondSelected);
+            var managerUpdatedSelected = dbServiceManager
+                    .getManager(managerSecondSelected.getNo())
+                    .orElseThrow(() -> new RuntimeException(
+                            "Manager not found after update, id: " + managerSecondSelected.getNo()));
+            log.info("managerUpdatedSelected:{}", managerUpdatedSelected);
+        }
     }
 
     private static void flywayMigrations(DataSource dataSource) {

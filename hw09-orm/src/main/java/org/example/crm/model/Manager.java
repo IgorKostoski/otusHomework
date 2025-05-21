@@ -1,7 +1,11 @@
 package org.example.crm.model;
 
+import org.example.jdbc.annotations.Id;
+
 public class Manager {
+    @Id
     private Long no;
+
     private String label;
     private String param1;
 
@@ -9,6 +13,11 @@ public class Manager {
 
     public Manager(String label) {
         this.label = label;
+    }
+
+    public Manager(String label, String param1) {
+        this.label = label;
+        this.param1 = param1;
     }
 
     public Manager(Long no, String label, String param1) {

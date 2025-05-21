@@ -1,10 +1,8 @@
 package org.example.crm.service;
 
-
-import org.example.crm.model.Manager;
-
 import java.util.List;
 import java.util.Optional;
+import org.example.crm.model.Manager;
 
 public interface DBServiceManager {
 

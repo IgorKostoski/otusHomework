@@ -1,5 +1,9 @@
 package org.example.jdbc.mapper;
 
+import org.example.core.repository.DataTemplate;
+import org.example.core.repository.DataTemplateException;
+import org.example.core.repository.executor.DbExecutor;
+
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,9 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import org.example.core.repository.DataTemplate;
-import org.example.core.repository.DataTemplateException;
-import org.example.core.repository.executor.DbExecutor;
 
 /**
  * Сохратяет объект в базу, читает объект из базы
@@ -23,6 +24,7 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
     private final EntitySQLMetaData entitySQLMetaData;
     private final EntityClassMetaData<T> entityClassMetaData;
 
+    
     public DataTemplateJdbc(
             DbExecutor dbExecutor, EntitySQLMetaData entitySQLMetaData, EntityClassMetaData<T> entityClassMetaData) {
         this.dbExecutor = dbExecutor;

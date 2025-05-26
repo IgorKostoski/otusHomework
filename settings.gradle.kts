@@ -1,5 +1,13 @@
 rootProject.name = "outsHomework"
 include("hw01-gradle")
+include("hw02-generics")
+include("hw03-annotations")
+
+
+
+
+
+
 
 
 pluginManagement {
@@ -23,3 +31,4 @@ pluginManagement {
         id("com.diffplug.spotless") version spotless
     }
 }
+include("hw03-annotations")

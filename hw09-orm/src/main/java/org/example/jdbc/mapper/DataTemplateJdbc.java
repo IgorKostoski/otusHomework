@@ -1,5 +1,9 @@
 package org.example.jdbc.mapper;
 
+import org.example.core.repository.DataTemplate;
+import org.example.core.repository.DataTemplateException;
+import org.example.core.repository.executor.DbExecutor;
+
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,9 +13,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-import org.example.core.repository.DataTemplate;
-import org.example.core.repository.DataTemplateException;
-import org.example.core.repository.executor.DbExecutor;
 
 /**
  * Сохратяет объект в базу, читает объект из базы
@@ -103,13 +104,50 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
     private T createEntityFromResultSet(ResultSet rs) throws ReflectiveOperationException, SQLException {
         T entity = entityClassMetaData.getConstructor().newInstance();
         for (Field field : entityClassMetaData.getAllFields()) {
-            Object value = rs.getObject(field.getName());
-
-            if (field.getType() == Long.class && value instanceof Integer integerValue) {
-                value = integerValue.longValue();
+            try {
+                Object value = getFieldValueFromResultSet(rs, field);
+                field.set(entity, value);
+            } catch (SQLException e) {
+                throw new DataTemplateException(new SQLException("Error getting value for field" + field.getName(), e));
+            } catch (IllegalAccessException e) {
+                throw new DataTemplateException(
+                        new SQLException("Error getting value for field" + field.getName() + ": " + e.getMessage()));
             }
-            field.set(entity, value);
         }
         return entity;
+    }
+
+    private Object getFieldValueFromResultSet(ResultSet rs, Field field) throws SQLException {
+        String columnName = field.getName();
+        Class<?> fieldType = field.getType();
+        Object value;
+
+        if (fieldType == String.class) {
+            value = rs.getString(columnName);
+        } else if (fieldType == Long.class) {
+            value = rs.getLong(columnName);
+            if (rs.wasNull()) {
+                value = null;
+            }
+        } else if (fieldType == long.class) {
+            value = rs.getLong(columnName);
+        } else if (fieldType == Integer.class) {
+            value = rs.getInt(columnName);
+            if (rs.wasNull()) {
+                value = null;
+            }
+        } else if (fieldType == int.class) {
+            value = rs.getInt(columnName);
+        } else if (fieldType == Boolean.class) {
+            value = rs.getBoolean(columnName);
+            if (rs.wasNull()) {
+                value = null;
+            }
+        } else if (fieldType == boolean.class) {
+            value = rs.getBoolean(columnName);
+        } else {
+            value = rs.getObject(columnName);
+        }
+        return value;
     }
 }

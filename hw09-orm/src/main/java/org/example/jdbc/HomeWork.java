@@ -1,5 +1,6 @@
 package org.example.jdbc;
 
+import javax.sql.DataSource;
 import org.example.core.repository.executor.DbExecutorImpl;
 import org.example.core.sessionmanager.TransactionRunnerJdbc;
 import org.example.crm.datasource.DriverManagerDataSource;
@@ -15,8 +16,6 @@ import org.example.jdbc.mapper.metadata.EntitySQLMetaDataImpl;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.sql.DataSource;
 
 @SuppressWarnings({"java:S125", "java:S1481"})
 public class HomeWork {

@@ -21,9 +21,7 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
         this.className = clazz.getSimpleName().toLowerCase();
 
         try {
-            this.constructor = clazz.getDeclaredConstructor();
-            //noinspection sonar:S3011
-            this.constructor.setAccessible(true);
+            this.constructor = clazz.getConstructor();
 
         } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException("Class " + clazz.getName() + "must have a no-args constructor", e);

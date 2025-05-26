@@ -1,16 +1,16 @@
 
 
-create tabe client
+create table client
 (
     id   bigserial NOT NULL PRIMARY KEY,
-    name varchar(50),
-       age smallint
+    name varchar(50)
+
 );
 
 create table manager
 (
-    id bigserial not null primary key ,
-    label varchar(50),
-    param1 varchar(50)
+    no bigserial not null primary key ,
+    label varchar(255),
+    param1 varchar(255)
 );
 

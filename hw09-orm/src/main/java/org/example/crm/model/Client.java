@@ -1,7 +1,11 @@
 package org.example.crm.model;
 
+import org.example.jdbc.annotations.Id;
+
 public class Client {
+    @Id
     private Long id;
+
     private String name;
 
     public Client() {}

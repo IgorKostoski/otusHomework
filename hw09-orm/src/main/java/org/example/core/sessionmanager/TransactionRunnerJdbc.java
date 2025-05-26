@@ -1,8 +1,8 @@
 package org.example.core.sessionmanager;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
+import javax.sql.DataSource;
 
 public class TransactionRunnerJdbc implements TransactionRunner {
     private final DataSource dataSource;
